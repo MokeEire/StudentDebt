@@ -57,7 +57,7 @@ total <- merge(states, debt, by = "region")
 #   because the states seem to get smaller east of DC
 ggplot()+geom_polygon( data=total, aes(x=long, y=lat.x, group = group, fill = avgdebt2014),colour="white" )+
   geom_text(aes(x = debt$lon, y = debt$lat, label = ifelse(!is.na(debt$tenyrpercchange) & debt$lon < -77, paste("+",debt$tenyrpercchange*100, "%", sep = ""), NA), hjust = ifelse(debt$region =="arkansas"|debt$region=="louisiana"|debt$region=="pennsylvania"|debt$region=="wisconsin"|debt$region=="missouri"|debt$region=="georgia"|debt$region=="west virginia", .8, ifelse(debt$region =="michigan"|debt$region=="washington"|debt$region=="montana"|debt$region=="south carolina", 0,0.5)), vjust = ifelse(debt$region =="mississippi"|debt$region=="tennessee"|debt$region=="south dakota"|debt$region=="alabama"|debt$region=="wisconsin"|debt$region=="missouri"|debt$region=="georgia"|debt$region=="oklahoma", -.3, ifelse(debt$region =="colorado"|debt$region=="pennsylvania"|debt$region=="michigan"|debt$region=="kansas", 1.3,0.5))), size = 4.5, fontface = "bold")+
-  theme_fivethirtyeight()+
+  theme_fivethirtyeight()+labs(caption = "Source: Institute for College Access & Success")+
   scale_fill_distiller(type = "seq", direction = 1, palette = "YlOrRd", guide_colorbar("Average student loan debt in 2014"))+
   theme(axis.ticks = element_blank(),  axis.text = element_blank(), legend.title = element_text(size = 18, margin = margin(t = 0, b = 50)), legend.key.width = unit(2, "cm"),legend.key.height = unit(.5,"cm"))+
   ggtitle("US College Debt in 2014", subtitle = "Average $ amount of debt and the % change from 2004-2014")+
@@ -97,9 +97,9 @@ ggplot()+geom_polygon( data=total, aes(x=long, y=lat.x, group = group, fill = av
 
 ggplot()+geom_polygon( data=total, aes(x=long, y=lat.x, group = group, fill = avgdebt2014),colour="white" )+
   geom_text(aes(x = debt$lon, y = debt$lat, label = ifelse(!is.na(debt$avgdebt2014) & debt$lon < -77, paste("$",debt$avgdebt2014-debt$avgdebt2004, sep = ""), NA), hjust = ifelse(debt$region =="arkansas"|debt$region=="louisiana"|debt$region=="pennsylvania"|debt$region=="wisconsin"|debt$region=="missouri"|debt$region=="georgia"|debt$region=="west virginia", .9, ifelse(debt$region =="michigan"|debt$region=="washington"|debt$region=="montana"|debt$region=="south carolina", 0,0.5)), vjust = ifelse(debt$region =="mississippi"|debt$region=="tennessee"|debt$region=="south dakota"|debt$region=="alabama"|debt$region=="wisconsin"|debt$region=="missouri"|debt$region=="georgia"|debt$region=="oklahoma", -.3, ifelse(debt$region =="colorado"|debt$region=="pennsylvania"|debt$region=="michigan"|debt$region=="kansas", 1.3,0.5))), size = 4.5, fontface = "bold")+
-  theme_fivethirtyeight()+labs(caption = "Source: Institute for College Access & Success")
+  theme_fivethirtyeight()+labs(caption = "Source: Institute for College Access & Success")+
   scale_fill_distiller(type = "seq", direction = 1, palette = "YlOrRd", guide_colorbar("Average student loan debt in 2014"))+
-  theme(axis.ticks = element_blank(),  axis.text = element_blank(), legend.title = element_text(size = 18, margin = margin(t = 0, b = 50)), legend.key.width = unit(2, "cm"),legend.key.height = unit(.5,"cm"))+
+  theme(axis.ticks = element_blank(), plot.caption = element_text(hjust = 0),  axis.text = element_blank(), legend.title = element_text(size = 18, margin = margin(t = 0, b = 50)), legend.key.width = unit(2, "cm"),legend.key.height = unit(.5,"cm"))+
   ggtitle("US College Debt in 2014", subtitle = "Average $ amount of debt and the $ change from 2004-2014")+
   annotate("text", x = -68, y = 40.25, label = paste("+", "$",debt[debt$region == "connecticut", 4]-debt[debt$region == "connecticut", 5], sep = ""), size = 4, fontface = "bold")+
   geom_segment(aes(x = debt[debt$region == "connecticut", 10], y = debt[debt$region == "connecticut", 11], xend = -68.8, yend = 40.25))+
