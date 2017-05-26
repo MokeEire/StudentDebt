@@ -38,6 +38,7 @@ for(i in 1:51){
 # Align the dataframes first
 colnames(debt)[1] <- "region" 
 debt$region <- tolower(debt$region) 
+debt <- debt[-c(2,12),]
 
 # Get longitude/latitude data
 states <- map_data("state") 
